@@ -11,7 +11,7 @@ switch(comando){
         console.log(tarea);
         break;
     case 'listar':
-        let listado = toDo.getList();
+        let listado = toDo.getList(argv.completado);
         for(let tarea of listado){
             if(tarea!=null){
                 console.log('====Por hacer===='.green);
@@ -24,11 +24,19 @@ switch(comando){
         break;
     case 'actualizar':
         let actualizado = toDo.actualizar(argv.descripcion, argv.completado);
-        console.log(actualizado);
+        if(actualizado){
+            console.log('Tarea actualizada con exito');
+        }else{
+            console.log('No se encontró la tarea o no se pudo actualizar');
+        }
         break;
     case 'borrar':
         let borrado = toDo.borrar(argv.descripcion);
-        console.log(borrado);
+        if(borrado){
+            console.log('Tarea borrada con exito');
+        }else{
+            console.log('No se encontró la tarea o no se pudo borrar');
+        }
         break;
     default: 
         console.log('Comando no reconocido');

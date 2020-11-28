@@ -19,10 +19,11 @@ const chargeDB = () => {
     }
 }
 
-const actualizar = (descripcion, completado = true) => {
+const actualizar = (descripcion, completado = "true") => {
     chargeDB();
     let index = listadoToDo.findIndex(tarea => tarea.descripcion === descripcion);
     if(index>=0){
+
         listadoToDo[index].completado = completado;
         saveDB();
         return true;
@@ -35,7 +36,7 @@ const crear = (descripcion) => {
     chargeDB();
     let toDo = {
         descripcion,
-        completado: false
+        completado: "false"
     }
 
     listadoToDo.push(toDo);
@@ -44,8 +45,11 @@ const crear = (descripcion) => {
     return toDo;
 }
 
-const getList = () => {
+const getList = (completado) => {
     chargeDB();
+    if(completado != 'all'){
+        return listadoToDo.filter(tarea => tarea.completado === completado);
+    }
     return listadoToDo;
 }
 
